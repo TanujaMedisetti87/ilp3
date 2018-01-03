@@ -1,0 +1,53 @@
+<div class='panel panel-primary'>
+    <div class='panel-heading'>
+        {{title}}
+    </div>
+    <div class='panel-body'>
+        <div class='row'>
+            <div class='col-md-2'>Filter by Title:</div>
+            <div class='col-md-4'>
+                <input type='text'
+                    [(ngModel)]='nameFilter' />
+            </div>
+        </div>
+        <table class='table table-striped table-condensed' *ngIf='books && books.length'>
+            <thead>
+                <tr>
+                    <th style="min-width: 80px;">Title</th>
+                    <th style="min-width: 60px;">Author</th>
+                    <th style="min-width: 30px;">ISBN</th>
+                    <th style="min-width: 30px;">Publication Date</th>
+                    <th style="min-width: 60px;">Publisher</th>
+                    <th style="min-width: 60px;">Price</th>
+                    <th style="min-width: 80px;">Genre</th>
+                    <th style="min-width: 80px;">Format</th>
+                    
+                    
+                    
+                    <th style="width:20px;"> </th>
+                    <th style="width:20px;"> </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor='let book of books | bookFilter: nameFilter'>
+                    <td><a [routerLink]="book.id">{{ book.name | uppercase }}</a></td>
+                    <td>{{ book.author }}</td>
+                    <td>{{ book.isbn }}</td>
+                    <td>{{ book.pdate }}</td>
+                    <td>{{ book.publisher }}</td>
+                    <td>{{ book.price }}</td>
+                    <td>{{ book.genre }}</td>
+                    <td>{{ book.format }}</td>
+                   
+                    
+                    
+                    <td><a [routerLink]="['/editBook',book.id]" class="btn btn-xs btn-primary">Edit</a></td>
+                    <td><a (click)="deleteBook(book.id)" class="btn btn-xs btn-danger">Delete</a></td>
+                </tr>
+            </tbody>
+        </table>
+        <a routerLink="/addBook" class="btn btn-xs btn-primary">Add Book</a>
+    </div>
+</div>
+
+
